@@ -1,19 +1,17 @@
 import React, { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
-import { SignupInput, SigninInput } from "@lo_ewolf/medium-common";
+import { Link, useNavigate } from "react-router-dom";
+import { SignupInput } from "@lo_ewolf/medium-common";
+import CreateUser from "../axios/CreateUser.ts";
+import LoginUser from "../axios/LoginUser.ts";
 
 const Auth = ({ type }: { type: "signup" | "signin" }) => {
-  const [postInput, setPostInput] =
-    type === "signup"
-      ? useState<SignupInput>({
-          email: "",
-          name: "",
-          password: "",
-        })
-      : useState<SigninInput>({
-          email: "",
-          password: "",
-        });
+  const navigate = useNavigate();
+  const [postInput, setPostInput] = useState<SignupInput>({
+    email: "",
+    name: "",
+    password: "",
+  });
+
   return (
     <div className="h-screen flex flex-col justify-center items-center">
       {type === "signup" ? (
@@ -43,10 +41,10 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
           placeholder="z@example.com"
           type="text"
           onChange={(e) => {
-            setPostInput((c) => ({
-              ...c,
+            setPostInput({
+              ...postInput,
               email: e.target.value,
-            }));
+            });
           }}
         ></LabelledInput>
 
@@ -79,6 +77,31 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
         <button
           type="button"
           className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          onClick={async () => {
+            try {
+              if (postInput.name === "") {
+                const response = await LoginUser(postInput);
+                console.log(response);
+                if (response.data.error) alert(response.data.error);
+                else {
+                  const token = response.data.token;
+                  localStorage.setItem("token", token);
+                  navigate("/blogs");
+                }
+              } else {
+                const response = await CreateUser(postInput);
+                if (response.data.error) alert(response.data.error);
+                else {
+                  const token = response.data.token;
+                  localStorage.setItem("token", token);
+                  navigate("/blogs");
+                }
+              }
+            } catch (e) {
+              console.log(e);
+              alert(e);
+            }
+          }}
         >
           {type === "signup" ? "Sign-up !" : "Sign-in !"}
         </button>
