@@ -18,12 +18,14 @@ exports.signinInput = zod_1.default.object({
 });
 // Create Blog input
 exports.createBlogInput = zod_1.default.object({
-    title: zod_1.default.string().min(5).max(50),
-    content: zod_1.default.string().min(6).max(50),
+    title: zod_1.default.string().min(5).max(300),
+    content: zod_1.default.string().min(6),
+    category: zod_1.default.string().min(2).max(20),
+    publishedAt: zod_1.default.string(),
 });
 // Update Blog input
 exports.updateBlogInput = zod_1.default.object({
-    title: zod_1.default.string().min(5).max(50),
-    content: zod_1.default.string().min(6).max(50),
+    title: zod_1.default.string().min(5).max(300),
+    content: zod_1.default.string().min(6),
     id: zod_1.default.string(),
 });

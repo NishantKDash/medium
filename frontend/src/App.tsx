@@ -5,6 +5,7 @@ import Signup from "./components/Signup";
 import Error from "./components/Error";
 import Blog from "./components/Blog";
 import Blogs from "./components/Blogs";
+import Publish from "./components/Publish";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/blog/:id" element={<Blog></Blog>}></Route>
           <Route path="/blogs" element={<Blogs></Blogs>}></Route>
           <Route path="/*" element={<Error></Error>}></Route>
+          <Route path="/publish" element={<Publish></Publish>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

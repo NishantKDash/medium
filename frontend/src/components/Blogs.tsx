@@ -1,60 +1,29 @@
-import React from "react";
 import BlogCard from "./BlogCard";
 import Appbar from "./Appbar";
+import { useBlog } from "../hooks";
 
-const blogs = [
-  {
-    author: "Peter V.",
-    topic: "Side Hustle",
-    title:
-      "How an Ugly Single Page Website Makes $5000 a Month with affiliate Marketing",
-    content:
-      "No need to create a fancy and modern website with hundreds of pages to make money online. -Making money online is the dream for man al;jsdkfjals;kdjfasdfjkalshdfjklahsdkjflhasdkjlfhkjasldhfjkahsdkjfhlskjdhfkljahsdfjklhasdkjfhk",
-    date: "12/12/12",
-  },
-  {
-    author: "Peter V.",
-    topic: "Side Hustle",
-    title:
-      "How an Ugly Single Page Website Makes $5000 a Month with affiliate Marketing",
-    content:
-      "No need to create a fancy and modern website with hundreds of pages to make money online. -Making money online is the dream for man al;jsdkfjals;kdjfasdfjkalshdfjklahsdkjflhasdkjlfhkjasldhfjkahsdkjfhlskjdhfkljahsdfjklhasdkjfhk",
-    date: "12/12/12",
-  },
-  {
-    author: "Peter V.",
-    topic: "Side Hustle",
-    title:
-      "How an Ugly Single Page Website Makes $5000 a Month with affiliate Marketing",
-    content:
-      "No need to create a fancy and modern website with hundreds of pages to make money online. -Making money online is the dream for man al;jsdkfjals;kdjfasdfjkalshdfjklahsdkjflhasdkjlfhkjasldhfjkahsdkjfhlskjdhfkljahsdfjklhasdkjfhk",
-    date: "12/12/12",
-  },
-  {
-    author: "Peter V.",
-    topic: "Side Hustle",
-    title:
-      "How an Ugly Single Page Website Makes $5000 a Month with affiliate Marketing",
-    content:
-      "No need to create a fancy and modern website with hundreds of pages to make money online. -Making money online is the dream for man al;jsdkfjals;kdjfasdfjkalshdfjklahsdkjflhasdkjlfhkjasldhfjkahsdkjfhlskjdhfkljahsdfjklhasdkjfhk",
-    date: "12/12/12",
-  },
-];
 const Blogs = () => {
+  const { load, blogs } = useBlog();
+  if (load) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
       <div className="hidden lg:block">
         <Appbar></Appbar>
       </div>
+
       {blogs.map((blog) => {
         return (
           <div className="mx-20">
             <BlogCard
-              author={blog.author}
-              topic={blog.topic}
+              key={blog.id}
+              id={blog.id}
+              author={blog.author.name}
+              topic={blog.category}
               title={blog.title}
               content={blog.content}
-              date={blog.date}
+              date={blog.publishedAt}
             ></BlogCard>
           </div>
         );

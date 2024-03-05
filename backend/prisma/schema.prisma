@@ -18,14 +18,16 @@ model User {
   name     String?
   password String
   email    String  @unique
+  about    String  @default("Medium Member")
   Blog     Blog[]
 }
 
 model Blog {
-  id        String  @id @default(uuid())
-  title     String
-  content   String
-  author    User    @relation(fields: [userId], references: [Id])
-  userId    String
-  published Boolean @default(false)
+  id          String @id @default(uuid())
+  title       String
+  content     String
+  author      User   @relation(fields: [userId], references: [Id])
+  userId      String
+  publishedAt String @default("12/12/2012")
+  category    String @default("Random")
 }

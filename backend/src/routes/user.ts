@@ -44,7 +44,6 @@ userRouter.post("/signup", async (c) => {
     });
   } catch (e) {
     console.log(e);
-    c.status(403);
     return c.json({ error: "Error creating User" });
   }
 });
