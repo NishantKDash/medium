@@ -15,7 +15,8 @@ const app = new Hono<{
 app.use(
   "/api/*",
   cors({
-    origin: "http://localhost:5173",
+    origin:
+      "https://medium-vercel-cxi8mftn1-nishants-projects-29269fb4.vercel.app",
     allowHeaders: [
       "Upgrade-Insecure-Requests",
       "content-type",
