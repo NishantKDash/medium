@@ -2,12 +2,18 @@ import { useParams } from "react-router-dom";
 import { useSingleBlog } from "../hooks";
 import Appbar from "./Appbar";
 import { format } from "date-fns";
+import BlogSkeleton from "./BlogSkeleton";
 const Blog = () => {
   const params = useParams();
   const id = params.id || "";
 
   const { load, blog } = useSingleBlog(id);
-  if (load) return <div>Loading...</div>;
+  if (load)
+    return (
+      <div>
+        L<BlogSkeleton></BlogSkeleton>
+      </div>
+    );
   else
     return (
       <div>

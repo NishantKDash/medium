@@ -11,5 +11,7 @@ npm run dev
 ```
 
 ```
+npx wrangler login
+npx wrangler whoami
 npm run deploy
 ```

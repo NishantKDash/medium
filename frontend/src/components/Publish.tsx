@@ -23,7 +23,7 @@ const Publish = () => {
           onClick={() => {
             CreateBlog(blog)
               .then((res) => {
-                alert("Blog Published !!");
+                alert(res.data.message || res.data.error);
                 navigate("/blogs");
               })
               .catch((e) => {

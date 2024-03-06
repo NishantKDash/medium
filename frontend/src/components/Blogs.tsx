@@ -1,11 +1,19 @@
 import BlogCard from "./BlogCard";
 import Appbar from "./Appbar";
 import { useBlog } from "../hooks";
+import Skeleton from "./BlogsSkeleton";
 
 const Blogs = () => {
   const { load, blogs } = useBlog();
   if (load) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Skeleton></Skeleton>
+        <Skeleton></Skeleton>
+        <Skeleton></Skeleton>
+        <Skeleton></Skeleton>
+      </div>
+    );
   }
   return (
     <div>
